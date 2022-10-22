@@ -5,34 +5,24 @@
                 <img src="assets/img/op.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
                 <h4 class="mb-0 px-3 text-bold">Messan<span style="color: #fff;">G</span>er</h4>
             </a>
-
-            <!-- <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-white">Overview</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Profile</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
-                </ul> -->
-
             <form class="col-8  d-flex justify-content-end ">
                 <input type="search" class="form-control ip-search" placeholder="Search..." aria-label="Search" style="width: 50%;">
                 <button class="btn btn-primary ip-search-btn"><i class="fa-solid fa-search"></i> </button>
             </form>
 
             <div class="col-1 text-end">
-
                 <div class="dropdown text-end">
                     <a href="#" class="d-block text-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <img src="{{asset('img/op.jpg')}}" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{url('profile')}}">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Log In</a></li>
-                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                        <li><a class="dropdown-item" href="{{url('change-password')}}">Change Password</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <li><a class="dropdown-item" href="{{url('logout')}}">Sign out</a></li>
                     </ul>
                 </div>
             </div>

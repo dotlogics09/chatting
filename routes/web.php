@@ -19,9 +19,13 @@ Route::get('/', function () {
 });
 
 // Route::post('/save-user', 'LoginController@storeUser');
-Route::post('/save-user', [LoginController::class,'storeUser']);
-Route::post('/login-user', [LoginController::class,'loginUser']);
+Route::post('/save-user', [LoginController::class, 'storeUser']);
+Route::post('/login-user', [LoginController::class, 'loginUser']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/logout', [LoginController::class, 'logout']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 });

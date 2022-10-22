@@ -3,16 +3,19 @@
 @section('content')
 <style>
     body::-webkit-scrollbar {
-    width: 2px !important;
-    color: #9e2828;
-  }
-  ::-webkit-scrollbar{
-    /* background: #9e2828;  */
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #9e2828; 
-  }
-    .login-wrap {       
+        width: 2px !important;
+        color: #9e2828;
+    }
+
+    ::-webkit-scrollbar {
+        /* background: #9e2828;  */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #9e2828;
+    }
+
+    .login-wrap {
         background: url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
         z-index: 0;
     }
@@ -179,77 +182,117 @@
                             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
                             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
                             <div class="login-form">
-                                <div class="sign-in-htm">
-                                    <div class="row mt-4">
-                                        <div class="col-md-12">
-                                            <div class="group">
-                                                <label for="user" class="label">Username</label>
-                                                <input id="user" type="text" class="input">
+                                <form action="{{url('login-user')}}" method="POST">
+                                    @csrf
+                                    <div class="sign-in-htm">
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <label for="user" class="label">Email</label>
+                                                    <input id="user" type="text" name="email" class="input">
+                                                    @if ($errors->has('email'))
+                                                    <span class="text-danger errorsignup">{{ $errors->first('email') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <label for="pass" class="label">Password</label>
+                                                    <input id="pass" type="password" name="password" class="input" data-type="password">
+                                                    @if ($errors->has('password'))
+                                                    <span class="text-danger errorsignup">{{ $errors->first('password') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-5 pb-2">
+                                            <div class="col-md-6">
+                                                <div class="group">
+                                                    <input id="check" type="checkbox" class="check" checked>
+                                                    <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="foot-lnk">
+                                                    <a href="#forgot">Forgot Password?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="group">
+                                            <input type="submit" class="button" value="Sign In">
+                                        </div>
+                                    </div>
+                                </form>
+                                <form action="{{url('save-user')}}" method="POST">
+                                    @csrf
+                                    <div class="sign-up-htm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <label for="user" class="label">First Name</label>
+                                                    <input id="user" type="text" name="first_name" class="input">
+                                                    @if ($errors->has('first_name'))
+                                                    <span class="text-danger errorsignup">{{ $errors->first('first_name') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <label for="pass" class="label">Last Name</label>
+                                                    <input id="pass" type="text" class="input" name="last_name">
+                                                    @if ($errors->has('last_name'))
+                                                    <span class="text-danger errorsignup">{{ $errors->first('last_name') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <label for="pass" class="label">User Name</label>
+                                                    <input id="pass" type="text" class="input" name="user_name">
+                                                    @if ($errors->has('user_name'))
+                                                    <span class="text-danger errorsignup">{{ $errors->first('user_name') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <label for="pass" class="label">Email</label>
+                                                    <input id="pass" type="email" name="email" class="input">
+                                                    @if ($errors->has('email'))
+                                                    <span class="text-danger errorsignup">{{ $errors->first('email') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <label for="pass" class="label">Password</label>
+                                                    <input id="pass" type="password" name="password" class="input" data-type="password">
+                                                    @if ($errors->has('password'))
+                                                    <span class="text-danger errorsignup">{{ $errors->first('password') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <label for="pass" class="label">Confirm Password</label>
+                                                    <input id="pass" type="password" name="confirm_password" class="input" data-type="password">
+                                                    @if ($errors->has('confirm_password'))
+                                                    <span class="text-danger errorsignup">{{ $errors->first('confirm_password') }}</span>
+                                                    @endif
+                                                </div>
                                             </div>
 
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="group">
-                                                <label for="pass" class="label">Password</label>
-                                                <input id="pass" type="password" class="input" data-type="password">
+                                            <div class="col-md-12">
+                                                <div class="group">
+                                                    <input type="submit" class="button" value="Sign Up">
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div class="foot-lnk">
+                                            <label for="tab-1">Already Member?</a>
                                         </div>
                                     </div>
-                                    <div class="row pt-5 pb-2">
-                                        <div class="col-md-6">
-                                            <div class="group">
-                                                <input id="check" type="checkbox" class="check" checked>
-                                                <label for="check"><span class="icon"></span> Keep me Signed in</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="foot-lnk">
-                                                <a href="#forgot">Forgot Password?</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="group">
-                                        <input type="submit" class="button" value="Sign In">
-                                    </div>
-
-
-                                </div>
-                                <div class="sign-up-htm">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="group">
-                                                <label for="user" class="label">Username</label>
-                                                <input id="user" type="text" class="input">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="group">
-                                                <label for="pass" class="label">Password</label>
-                                                <input id="pass" type="password" class="input" data-type="password">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="group">
-                                                <label for="pass" class="label">Repeat Password</label>
-                                                <input id="pass" type="password" class="input" data-type="password">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="group">
-                                                <label for="pass" class="label">Email Address</label>
-                                                <input id="pass" type="text" class="input">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="group">
-                                                <input type="submit" class="button" value="Sign Up">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="foot-lnk">
-                                        <label for="tab-1">Already Member?</a>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

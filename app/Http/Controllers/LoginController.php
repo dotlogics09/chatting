@@ -55,4 +55,10 @@ class LoginController extends Controller
             return back()->withInput()->with('password_check', '* Please enter the correct Password.');
         }
     }
+
+    function logout()
+    {
+        session()->flush();
+        return redirect('/')->with('fail', 'Logout Successfully');
+    }
 }
