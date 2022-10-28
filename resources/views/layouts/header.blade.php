@@ -17,7 +17,6 @@
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                         <li><a class="dropdown-item" href="{{url('profile')}}">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Log In</a></li>
                         <li><a class="dropdown-item" href="{{url('change-password')}}">Change Password</a></li>
                         <li>
                             <hr class="dropdown-divider">

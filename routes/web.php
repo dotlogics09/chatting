@@ -28,4 +28,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
+
+    Route::get('/change-password', function () {
+        return view('changePassword');
+    });
+
+    Route::post('/changePassword', [LoginController::class, 'change_password']);
 });

@@ -197,6 +197,15 @@
                                             </div>
                                         </div>
                                         @endif
+                                        @if (Session::has('errorMessage'))
+                                        <div class="container-fluid hidediv">
+                                            <div class="card card-style">
+                                                <div class="card-body">
+                                                    <div class="alert alert-danger">{{ session::get('successMessage') }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
                                         <li class="list-group-item msg-single active " onclick="append_data('1')">
                                             <div class="media row d-flex">
 
