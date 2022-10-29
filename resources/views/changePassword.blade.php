@@ -1,7 +1,17 @@
 @extends('layouts.master')
 @section('title', 'Change Password')
 @section('content')
+
 <form action="{{url('changePassword')}}" method="post" style="text-align: center; margin-top: 30px;">
+    @if (Session::has('errorMessage'))
+    <div class="container-fluid hidediv">
+        <div class="card card-style">
+            <div class="card-body">
+                <div class="alert alert-danger">{{ session::get('errorMessage') }}</div>
+            </div>
+        </div>
+    </div>
+    @endif
     @csrf
     <input type="hidden" name="id" value="{{session('id')}}">
     <input type="text" name="old_password" placeholder="Old Password">

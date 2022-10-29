@@ -13,9 +13,13 @@
             <div class="col-1 text-end">
                 <div class="dropdown text-end">
                     <a href="#" class="d-block text-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{asset('img/op.jpg')}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <img src="{{asset('uploads/profile_images')}}/{{session('profile_img')}}" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li style="margin-left: 10px;"><img src="{{asset('uploads/profile_images')}}/{{session('profile_img')}}" alt="mdo" width="32" height="32" class="rounded-circle"> {{session('first_name')}} {{session('last_name')}}</li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="{{url('profile')}}">Profile</a></li>
                         <li><a class="dropdown-item" href="{{url('change-password')}}">Change Password</a></li>
                         <li>

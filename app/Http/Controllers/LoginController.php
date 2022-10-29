@@ -47,12 +47,15 @@ class LoginController extends Controller
         if ($data) {
             if (!Auth::check($request->email)) {
                 $request->session()->put('id', $data->id);
+                $request->session()->put('profile_img', $data->profile_img);
+                $request->session()->put('first_name', $data->first_name);
+                $request->session()->put('last_name', $data->last_name);
                 $request->session()->put('user_type', $data->type);
 
                 return redirect('/dashboard')->with('successMessage', 'Login Successfully');
             }
         } else {
-            return back()->withInput()->with('password_check', '* Please enter the correct Password.');
+            return back()->with('password_check', '* Please enter the correct Password.');
         }
     }
 
@@ -81,17 +84,44 @@ class LoginController extends Controller
             if ($user_data->password == $old_password) {
                 if ($new_password == $confirm_password) {
                     $change_password = Users::find($user_id);
-                    $change_password->password = md5($request->password);
+                    $change_password->password = md5($new_password);
                     $change_password->save();
                 } else {
-                    return redirect('/dashboard')->with(['errorMessage' => 'The New Password and Confirm Password must be same']);
+                    return back()->with(['errorMessage' => 'Please check your new password and confirm password']);
                 }
             } else {
-                return redirect('/dashboard')->with(['errorMessage' => 'Please Check your Old Password']);
-                
+                return back()->with(['errorMessage' => 'Please check your Old Password']);
             }
         }
 
-        return redirect('/dashboard')->with(['successMessage' => 'Password Updated Succesfully']);
+        return redirect('dashboard')->with(['successMessage' => 'Password Updated Successfully']);
+    }
+
+    function show_profile()
+    {
+        $user_id = session('id');
+        $show_profile = Users::find($user_id);
+        // return $show_profile;die;
+
+        return view('profile', compact('show_profile'));
+    }
+
+    function update_profile(Request $request)
+    {
+        $user_id = session('id');
+        $update_profile = Users::find($user_id);
+        $update_profile->first_name = $request->first_name;
+        $update_profile->last_name = $request->last_name;
+        $update_profile->username = $request->username;
+        $update_profile->email = $request->email;
+        $update_profile->phone = $request->phone;
+        if ($request->profile_img) {
+            $imageName = time() . '.' . $request->profile_img->extension();
+            $request->profile_img->move(public_path('uploads/profile_images'), $imageName);
+            $update_profile->profile_img = $imageName;
+        }
+        $update_profile->save();
+
+        return redirect('profile')->with(['successMessage' => 'Profile Updated Successfully']);
     }
 }

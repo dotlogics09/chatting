@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +26,16 @@ Route::post('/login-user', [LoginController::class, 'loginUser']);
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/logout', [LoginController::class, 'logout']);
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::get('/change-password', function () {
         return view('changePassword');
     });
 
     Route::post('/changePassword', [LoginController::class, 'change_password']);
+
+    Route::get('profile', [LoginController::class, 'show_profile']);
+    Route::post('update_profile', [LoginController::class, 'update_profile']);
+
+    Route::post('show_chat', [DashboardController::class, 'show_chat']);
 });

@@ -163,10 +163,17 @@
     #get_data_details_2 {
         display: none;
     }
-    h1,h2,h3,h4,h5,h6{
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         margin-bottom: 2px;
     }
-    p{
+
+    p {
         margin-bottom: 2px;
     }
 </style>
@@ -188,6 +195,8 @@
                                                 </form>
                                             </div>
                                         </li>
+
+                                        <!-- flash message section start -->
                                         @if (Session::has('successMessage'))
                                         <div class="container-fluid hidediv">
                                             <div class="card card-style">
@@ -206,14 +215,15 @@
                                             </div>
                                         </div>
                                         @endif
-                                        <li class="list-group-item msg-single active " onclick="append_data('1')">
+                                        <!-- flash message section end -->
+
+                                        @foreach($findPeoples as $people)
+                                        <li class="list-group-item msg-single active" onclick="append_data({{$people->id}})">
                                             <div class="media row d-flex">
-
                                                 <img class="mr-3 col-3 img-fluid-01 img-fluid rounded-circle" width="44" height="44" src="assets/img/op.jpg" alt="placeholder image">
-
                                                 <div class=" col-9 d-flex justify-content-between">
                                                     <div class="media-body">
-                                                        <h3 class="mt-0">Jassica</h3>
+                                                        <h3 class="mt-0">{{$people->first_name}}</h3>
                                                         <p>Sed elementum libero...</p>
                                                     </div>
                                                     <div class="time">
@@ -221,45 +231,9 @@
                                                         <span class="bg-danger">2</span>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </li>
-                                        <li class="list-group-item msg-single active " onclick="append_data('2')">
-                                            <div class="media row d-flex">
-
-                                                <img class="mr-3 col-3 img-fluid-01 img-fluid rounded-circle" width="44" height="44" src="assets/img/op.jpg" alt="placeholder image">
-
-                                                <div class=" col-9 d-flex justify-content-between">
-                                                    <div class="media-body">
-                                                        <h3 class="mt-0">Jassica</h3>
-                                                        <p>Sed elementum libero...</p>
-                                                    </div>
-                                                    <div class="time">
-                                                        <h5>07.50 PM</h5>
-                                                        <span class="bg-danger">2</span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item msg-single active " onclick="append_data('3')">
-                                            <div class="media row d-flex">
-
-                                                <img class="mr-3 col-3 img-fluid-01 img-fluid rounded-circle" width="44" height="44" src="assets/img/op.jpg" alt="placeholder image">
-
-                                                <div class=" col-9 d-flex justify-content-between">
-                                                    <div class="media-body">
-                                                        <h3 class="mt-0">Jassica</h3>
-                                                        <p>Sed elementum libero...</p>
-                                                    </div>
-                                                    <div class="time">
-                                                        <h5>07.50 PM</h5>
-                                                        <span class="bg-danger">2</span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -274,13 +248,24 @@
 </section>
 
 <script>
-    function append_data(test) {
-        // console.log('hello');
-        var a = test;
+    function append_data(id) {
+        var people_id = id;
 
-        var view = '<div class="card"><div class="card-body"><div class="event-chat-ryt"><ul class="list-group"><li class="list-group-item"><div class="media row"><div class="media-img col-2"><img class="mr-3 img-fluid img-fluid-02 rounded-circle" src="assets/img/welcome.webp" alt="placeholder image"></div><div class="col-md-10 d-flex justify-content-between"><div class="media-body"><h3 class="mb-0">Jassica' + a + '</h3><p class="mb-0">Online</p></div><button class="btn"><i class="fa fa-ellipsis-v msg-btn"></i></button></div></li><li class="list-group-item"><div class="char-area"><div class="chat-reciver"><h4>Hey How are you?</h4><p>8.00 PM</p></div><div class="chat-sender"><h4>Hey I am fine. you?</h4><p>8.05 PM</p></div><div class="chat-reciver"><h4>Sed elementum libero mattis velit pulvinar, ut sodaleex euismod. In in imperdiet purus, a molestie ante.Nullam a vestibulum diam, et commodo quam.</h4><p>8.10 PM</p></div><div class="chat-sender"><h4>ok Sir</h4><p>8.20 PM</p></div></div><div class="char-type"><form class="d-flex justify-content-center" action="#" method="post"><input type="text" class="form-control" placeholder="Type Here..."><button class="btn btn-danger">SEND</button></form></div></li></ul></div></div></div>';
-        console.log(view);
-        document.getElementById("dynamic_data").innerHTML = view;
+        let data = {
+            _token: '{{ csrf_token() }}',
+            _method: 'POST',
+            id: people_id,
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url('show_chat') }}",
+            data: data,
+            redirect: true,
+            success: function(result) {
+                document.getElementById("dynamic_data").innerHTML = result;
+            }
+        });
     }
 </script>
 @endsection

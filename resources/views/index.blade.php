@@ -179,6 +179,15 @@
                 <div class="col-md-5">
                     <div class="login-wrap">
                         <div class="login-html">
+                            @if (Session::has('password_check'))
+                            <div class="container-fluid hidediv">
+                                <div class="card card-style">
+                                    <div class="card-body">
+                                        <div class="alert alert-danger">{{ session::get('password_check') }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
                             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
                             <div class="login-form">
