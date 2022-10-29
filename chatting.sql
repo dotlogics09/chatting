@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2022 at 12:38 PM
+-- Generation Time: Oct 29, 2022 at 09:51 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -24,6 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `reciever_id` int(11) NOT NULL,
+  `message` varchar(555) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -36,6 +51,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `profile_img` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -44,13 +60,23 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `type`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Sujal', 'Saxena', 'sujal01', 'Admin', 'sujal@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', '2022-10-15 08:24:51', '2022-10-15 13:54:51'),
-(2, 'Ishu', 'Kaushik', 'ishu01', 'User', 'ishu@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', '2022-10-15 08:25:51', '2022-10-15 13:55:51');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `type`, `email`, `phone`, `password`, `profile_img`, `created_at`, `updated_at`) VALUES
+(1, 'Sujal', 'Saxena', 'sujal', 'Admin', 'sujal@gmail.com', '8962576134', 'e10adc3949ba59abbe56e057f20f883e', '1667071062.png', '2022-10-29 12:40:08', '2022-10-29 19:20:45'),
+(2, 'Ishu', 'Kaushik', 'ishu', 'User', 'ishu@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, '2022-10-29 12:56:19', '2022-10-29 18:26:19'),
+(3, 'Shahid', 'Raja', 'shahid', 'User', 'shahid@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, '2022-10-29 13:12:13', '2022-10-29 18:42:13'),
+(4, 'Yogesh', 'Chauhan', 'yogesh', 'User', 'yogesh@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, '2022-10-29 13:12:52', '2022-10-29 18:42:52'),
+(5, 'Vinit', 'Garg', 'vinit', 'User', 'vinit@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, '2022-10-29 13:13:20', '2022-10-29 18:43:20'),
+(6, 'Ankit', 'Thakur', 'ankit', 'User', 'ankit@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, '2022-10-29 13:13:50', '2022-10-29 18:43:50');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -63,10 +89,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
