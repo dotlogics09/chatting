@@ -242,6 +242,27 @@
                 </div>
 
                 <div id="dynamic_data" class="col-md-8"></div>
+
+                <?php
+                /*<div class="char-area">
+                    <div class="chat-reciver">
+                        <h4>Hey How are you?</h4>
+                        <p>8.00 PM</p>
+                    </div>
+                    <div class="chat-sender">
+                        <h4>Hey I am fine. you?</h4>
+                        <p>8.05 PM</p>
+                    </div>
+                    <div class="chat-reciver">
+                        <h4>Sed elementum libero mattis velit pulvinar, ut sodaleex euismod. In in imperdiet purus, a molestie ante.Nullam a vestibulum diam, et commodo quam.</h4>
+                        <p>8.10 PM</p>
+                    </div>
+                    <div class="chat-sender">
+                        <h4>ok Sir</h4>
+                        <p>8.20 PM</p>
+                    </div>
+                </div>
+                */?>
             </div>
         </div>
     </div>
@@ -250,20 +271,27 @@
 <script>
     function append_data(id) {
         var people_id = id;
-
-        let data = {
-            _token: '{{ csrf_token() }}',
-            _method: 'POST',
-            id: people_id,
-        }
+        var url = "{{ url('show_chat') }}/" + people_id;
 
         $.ajax({
-            type: "POST",
-            url: "{{ url('show_chat') }}",
-            data: data,
+            type: "GET",
+            url: url,
+            // data: data,
             redirect: true,
             success: function(result) {
                 document.getElementById("dynamic_data").innerHTML = result;
+            }
+        });
+    }
+
+    function sendMessage() {
+
+        $.ajax({
+            url: "{{ url('send_message') }}",
+            type: 'post',
+            data: $("#save-form").serialize(),
+            success: function(data) {
+                console.log(data);
             }
         });
     }

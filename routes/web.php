@@ -38,6 +38,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('profile', [LoginController::class, 'show_profile']);
     Route::post('update_profile', [LoginController::class, 'update_profile']);
 
-    Route::post('show_chat', [DashboardController::class, 'show_chat']);
+    Route::get('show_chat/{id}', [DashboardController::class, 'show_chat']);
     Route::post('send_message', [MessageController::class, 'send']);
 });
