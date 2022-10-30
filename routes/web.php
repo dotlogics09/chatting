@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,5 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('update_profile', [LoginController::class, 'update_profile']);
 
     Route::post('show_chat', [DashboardController::class, 'show_chat']);
+    Route::post('send_message', [MessageController::class, 'send']);
 });

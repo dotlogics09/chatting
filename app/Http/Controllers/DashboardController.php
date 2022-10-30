@@ -26,7 +26,7 @@ class DashboardController extends Controller
 
         $view .= '<div class="char-area"><div class="chat-reciver"><h4>Hey How are you?</h4><p>8.00 PM</p></div><div class="chat-sender"><h4>Hey I am fine. you?</h4><p>8.05 PM</p></div><div class="chat-reciver"><h4>Sed elementum libero mattis velit pulvinar, ut sodaleex euismod. In in imperdiet purus, a molestie ante.Nullam a vestibulum diam, et commodo quam.</h4><p>8.10 PM</p></div><div class="chat-sender"><h4>ok Sir</h4><p>8.20 PM</p></div></div>';
         
-        $view .= '<div class="char-type"><form class="d-flex justify-content-center" action="#" method="post"><input type="text" class="form-control" placeholder="Type Here..."><button class="btn btn-danger">SEND</button></form></div></li></ul></div></div></div>';
+        $view .= '<div class="char-type"><form class="d-flex justify-content-center" action="'. url('send_message') .'" method="post">'. csrf_token() .'<input type="text" class="form-control" name="message" placeholder="Type Here..."><button class="btn btn-danger">SEND</button></form></div></li></ul></div></div></div>';
 
         return $view;
     }
