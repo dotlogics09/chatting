@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2022 at 09:51 PM
+-- Generation Time: Nov 12, 2022 at 05:22 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -30,11 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
   `sender_id` int(11) NOT NULL,
-  `reciever_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
   `message` varchar(555) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `sender_id`, `receiver_id`, `message`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 'ertyui', '2022-10-30 13:19:31', '2022-10-30 13:19:31'),
+(2, 2, 1, 'dfghjhvc', '2022-10-30 13:19:39', '2022-10-30 13:19:39'),
+(3, 1, 2, 'gfhjk', '2022-10-30 13:31:56', '2022-10-30 13:31:56'),
+(4, 2, 1, 'jbbw cjkasc skjc chjb 7890 hgjkl', '2022-10-30 13:32:30', '2022-10-30 13:32:30');
 
 -- --------------------------------------------------------
 
@@ -92,7 +102,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
